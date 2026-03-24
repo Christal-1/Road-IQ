@@ -1,0 +1,6 @@
+@RoadIQ.Api_HostAddress = http://localhost:5183
+
+GET {{RoadIQ.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

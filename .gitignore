@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# SQLite
+*.db
+
+# OS
+.DS_Store
+Thumbs.db

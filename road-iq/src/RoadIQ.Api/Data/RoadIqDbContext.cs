@@ -12,14 +12,16 @@ public class RoadIqDbContext : DbContext
 
     public DbSet<RoadSegment> RoadSegments => Set<RoadSegment>();
     public DbSet<RoadWearSnapshot> RoadWearSnapshots => Set<RoadWearSnapshot>();
+    public DbSet<RoadDegradationProfile> RoadDegradationProfiles => Set<RoadDegradationProfile>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RoadSegment>()
-            .HasMany(r => r.WearSnapshots)
-            .WithOne(w => w.RoadSegment)
-            .HasForeignKey(w => w.RoadSegmentId);
+        .HasOne<RoadDegradationProfile>()
+        .WithOne(p => p.RoadSegment)
+        .HasForeignKey<RoadDegradationProfile>(p => p.RoadSegmentId);
 
         base.OnModelCreating(modelBuilder);
     }
+
 }

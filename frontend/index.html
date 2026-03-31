@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RoadIQ Dashboard</title>
+
+  <!-- ✅ Correct way to link CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <h1>RoadIQ – Road Wear Intelligence</h1>
+
+  <section>
+    <h2>1️⃣ Ingest Test Drive</h2>
+    <button onclick="sendTestDrive()">Send Sample Drive</button>
+    <pre id="wearResult"></pre>
+  </section>
+
+  <section>
+    <h2>2️⃣ Road Degradation Forecast</h2>
+    <label>
+      Road Segment ID:
+      <input type="number" id="segmentId" value="1" />
+    </label>
+    <br /><br />
+    <button onclick="getForecast()">Get Forecast</button>
+    <pre id="forecastResult"></pre>
+  </section>
+
+  <!-- ✅ Correct way to link JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

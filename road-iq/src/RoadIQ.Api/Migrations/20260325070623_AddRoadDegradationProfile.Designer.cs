@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RoadIQ.Api.Data;
 
@@ -10,9 +11,11 @@ using RoadIQ.Api.Data;
 namespace RoadIQ.Api.Migrations
 {
     [DbContext(typeof(RoadIqDbContext))]
-    partial class RoadIqDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260325070623_AddRoadDegradationProfile")]
+    partial class AddRoadDegradationProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");

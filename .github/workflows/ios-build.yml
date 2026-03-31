@@ -30,12 +30,25 @@ jobs:
         working-directory: mobile/roadiq_logger
         run: flutter build ios --release --no-codesign
 
+      - name: Debug build output path
+        working-directory: mobile/roadiq_logger
+        run: |
+          echo "Listing build directory"
+          ls -la build/ios
+          ls -la build/ios/iphoneos || true
+
       - name: Zip build output
         working-directory: mobile/roadiq_logger
         run: |
           mkdir -p artifact
-          cd build/ios/iphoneos
-          zip -r "${GITHUB_WORKSPACE}/artifact/Runner-ios.zip" Runner.app
+          if [ -d "build/ios/iphoneos/Runner.app" ]; then
+            cd build/ios/iphoneos
+            zip -r "${GITHUB_WORKSPACE}/artifact/Runner-ios.zip" Runner.app
+          else
+            echo "Runner.app not found in build/ios/iphoneos"
+            ls -la build/ios/iphoneos
+            exit 1
+          fi
 
       - name: Upload iOS artifact
         uses: actions/upload-artifact@v4

@@ -29,3 +29,16 @@ jobs:
       - name: Build iOS app (no signing yet)
         working-directory: mobile/roadiq_logger
         run: flutter build ios --release --no-codesign
+
+      - name: Zip build output
+        working-directory: mobile/roadiq_logger
+        run: |
+          mkdir -p artifact
+          cd build/ios/iphoneos
+          zip -r "${GITHUB_WORKSPACE}/artifact/Runner-ios.zip" Runner.app
+
+      - name: Upload iOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: artifact/Runner-ios.zip

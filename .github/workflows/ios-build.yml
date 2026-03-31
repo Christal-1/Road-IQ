@@ -36,17 +36,21 @@ jobs:
           echo "Listing build directory"
           ls -la build/ios
           ls -la build/ios/iphoneos || true
+          echo "Searching for Runner.app in build path"
+          find build/ios -type d -name "Runner.app" -print
 
       - name: Zip build output
         working-directory: mobile/roadiq_logger
         run: |
           mkdir -p artifact
-          if [ -d "build/ios/iphoneos/Runner.app" ]; then
-            cd build/ios/iphoneos
-            zip -r "${GITHUB_WORKSPACE}/artifact/Runner-ios.zip" Runner.app
+          APP_PATH=$(find build/ios -type d -name "Runner.app" | head -n 1)
+          if [ -n "$APP_PATH" ]; then
+            echo "Found Runner.app at: $APP_PATH"
+            cd "$APP_PATH/.."
+            zip -r "${GITHUB_WORKSPACE}/artifact/Runner-ios.zip" "$(basename "$APP_PATH")"
           else
-            echo "Runner.app not found in build/ios/iphoneos"
-            ls -la build/ios/iphoneos
+            echo "Runner.app not found in build/ios"
+            find build/ios -type d -maxdepth 5 -print
             exit 1
           fi
 

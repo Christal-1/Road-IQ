@@ -2,7 +2,7 @@ name: iOS Flutter Build (macOS)
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
       - name: Zip build output
         working-directory: mobile/roadiq_logger
         run: |
-          mkdir -p artifact
+          mkdir -p "${GITHUB_WORKSPACE}/artifact"
           APP_PATH=$(find build/ios -type d -name "Runner.app" | head -n 1)
           if [ -n "$APP_PATH" ]; then
             echo "Found Runner.app at: $APP_PATH"
